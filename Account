@@ -91,4 +91,10 @@ public class Account {
 	public String getLocation() {
 		return this.location;
 	}
+	
+	public String print() {
+		String str = "Username: " + getUserName() + "	First Name: " + getFirstName() + "	Last Name: " + getLastName() 
+					+ "\nEmail: " + getEmail() + "	Location: " + getLocation();
+		return str;
+	}
 }
