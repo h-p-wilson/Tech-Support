@@ -6,6 +6,14 @@ public class BusinessAccount extends Account {
 	}
 
 	private String company;
+	private int ID;
+	private int nextID = 1;
+	private String offices[] = new String[1];
+	private String equipment[] = new String[1];
+	private String software[] = new String[1];
+	private int officeCount = 0;
+	private int equipCount = 0;
+	private int softCount = 0;
 	
 
 	public void setCompany(String company) {
@@ -19,9 +27,44 @@ public class BusinessAccount extends Account {
 			}
 		}
 	}
+		
+	public void setID() {
+		this.ID = nextID;
+		nextID ++;
+	}
 	
-	public String setCompany() {
+	public void AddOffice(String office) {
+		offices[officeCount] = office;
+	}
+	
+	public void AddEquip(String equip) {
+		equipment[equipCount] = equip;
+	}
+	
+	public void AddSoft(String soft) {
+		software[softCount] = soft;
+	}
+	
+
+	
+	public String getCompany() {
 		return this.company;
+	}
+	
+	public int getID() {
+		return this.ID;
+	}
+	
+	public String[] getOffices() {
+		return this.offices;
+	}
+	
+	public String[] getEquipment() {
+		return this.equipment;
+	}
+	
+	public String[] getSoftware() {
+		return this.software;
 	}
 
 }
