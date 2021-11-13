@@ -1,16 +1,23 @@
 import java.util.Scanner;
 public class Application {
 
+	static final int MAX = 6;
+	static BusinessAccount[] bAccounts = new BusinessAccount[MAX];
+	static Scanner input = new Scanner(System.in);
+	static Account account = null;
+			
 	public static void main(String[] args) {
-		Scanner input = new Scanner(System.in); 
-		Account account;
+
+		
+		populateBusiness();
+	
 		
 		System.out.println("Welcome to PlaceHolderName" + "\nPlease Create an Account");
 		String[] options = {"Customer", "Business"};
 		Menu busiOrCust = new Menu ("Are you a customer or a business?", options );
 		int choice = busiOrCust.getUserChoice();
 		AccountType type = null;
-		if (choice == 1) {
+		if (choice == 1) {												
 			type = AccountType.CUSTOMER;
 		}
 		if (choice == 2) {
@@ -24,16 +31,140 @@ public class Application {
 		String secondName = input.nextLine();
 		System.out.println("Please Enter Your Email: ");
 		String email = input.nextLine();
-		System.out.println("Please Enter Your Location: ");
+		System.out.println("Please Enter Your Location: (For testing sake please enter Belfast, Glasgow or London");
 		String location = input.nextLine();
-		if (type == AccountType.CUSTOMER) {
+		if (type == AccountType.CUSTOMER) {									//ISSUE WITH THIS IT DOESN'T WORK
 			account = new CustomerAccount(userName, firstName, secondName, email, location);
 		}
 		if (type == AccountType.BUSINESS) {
 			System.out.println("Please Enter Your Company");
 			String company = input.nextLine();
 			account = new BusinessAccount(userName, firstName, secondName, email, location, company);
+			bAccounts[0] = (BusinessAccount) account;
 		}
+		
+		String[] mainOptions = {"View Office Space", "View Equipment", "View Software", "Change Profile Information", "Leave Review", "Quit"};
+		Menu main = new Menu("Main Menu: ", mainOptions);
+		int quitOption = options.length;
+		boolean done = false;
+		
+		do {
+			choice = main.getUserChoice();
+			if (choice == quitOption) {
+				done = true;
+			} else {
+				processOption(choice, account);
+			}
+		} while (!done);
+	
+	}
+	
+	public static void processOption(int choice, Account account) {
+		switch(choice) {
+		case 1:
+			viewOfficeSpace(account.getLocation());
+			break;
+		case 2:
+			viewEquipment(account.getLocation());		//issue with 2 for some reason
+			break;
+		case 3:
+			viewSoftware(account.getLocation());
+			break;
+		case 4:
+			changeProfileInformation();
+			break;
+		case 5:
+			leaveReview();
+			break;
+		}
+	}
+	
+	private static void viewOfficeSpace(String location) {
+		System.out.println("ViewOfficeSpace");
+		for (int i = 0; i < MAX; i++) {								//ISSUE INFINITE LOOP
+			String[] theirOffices = bAccounts[i].getOffices();
+			for (int j = 0; j < theirOffices.length; i++) {
+				System.out.println(theirOffices.toString());
+			}
+		} 
+	}
+	
+	private static void viewEquipment(String location) {
+		System.out.println("ViewEquipment");
+	}
+	
+	private static void viewSoftware(String location) {
+		System.out.println("ViewSoftware");
+	}
+	
+	private static void changeProfileInformation() {
+		System.out.println("\n");
+		System.out.println("Current Profile:\n");
+		account.print();
+		System.out.println("\n");
+		String[] changeProfileOptions = {"Change Username", "Change First Name", "Change Last Name", "Change Location"};
+		Menu changeProfile = new Menu("Change Profile Information", changeProfileOptions);
+		int choice = changeProfile.getUserChoice();
+		switch(choice) {
+		case 1:
+			System.out.println("Please enter new username: ");
+			String userName = input.nextLine();
+			account.setUserName(userName);
+			break;
+		case 2: 
+			System.out.println("Please enter new first name: ");
+			String firstName = input.nextLine();
+			account.setFirstName(firstName);
+			break;
+		case 3: 
+			System.out.println("Please enter new last name: ");
+			String lastName = input.nextLine();
+			account.setLastName(lastName);
+			break;
+		case 4:
+			System.out.println("Please enter new location: ");
+			String location = input.nextLine();
+			account.setLocation(location);
+			break;
+		}
+	}
+	
+	private static void leaveReview() {
+		System.out.println("LeaveReview");
+	}
+	
+	private static void populateBusiness() {
+		BusinessAccount a1 = new BusinessAccount("WeirdAlbert", "Albert", "Yakovitsky", "address@a.com", "Belfast", "BigCompany");
+		a1.AddOffice("1 Silly Street");
+		a1.AddEquip("MicroHard Laptop");
+		a1.AddSoft("NotPhotoShop");
+		BusinessAccount a2 = new BusinessAccount("LadyGooGoo", "Miss", "Googoo", "address@a.com", "Belfast", "WeeCompany");
+		a2.AddOffice("2 Silly Street");
+		a2.AddEquip("MicroHard Laptop");
+		a2.AddSoft("NotPhotoShop");
+		BusinessAccount a3 = new BusinessAccount("JustoutBeaver", "Justout", "Beaver", "address@a.com", "London", "MediumCompany");
+		a3.AddOffice("3 Silly Street");
+		a3.AddEquip("MicroHard Laptop");
+		a3.AddSoft("NotPhotoShop");
+		BusinessAccount a4 = new BusinessAccount("Marinara", "Marinara", "Diamond", "address@a.com", "London", "WeeMediumCompany");
+		a4.AddOffice("4 Silly Street");
+		a4.AddEquip("MicroHard Laptop");
+		a4.AddSoft("NotPhotoShop");
+		BusinessAccount a5 = new BusinessAccount("BabDylo", "Bab", "Dylo", "address@a.com", "Glasgow", "MediumBigCompany");
+		a5.AddOffice("5 Silly Street");
+		a5.AddEquip("MicroHard Laptop");
+		a5.AddSoft("NotPhotoShop");
+		BusinessAccount a6 = new BusinessAccount("SandRabbit", "Sand", "Rabbit", "address@a.com", "Glasgow", "WeeBigCompany");
+		a6.AddOffice("6 Silly Street");
+		a6.AddEquip("MicroHard Laptop");
+		a6.AddSoft("NotPhotoShop");
+		
+		bAccounts[0] = a1;
+		bAccounts[1] = a2;
+		bAccounts[2] = a3;
+		bAccounts[3] = a4;
+		bAccounts[4] = a5;
+		bAccounts[5] = a6;
 	}
 
 }
