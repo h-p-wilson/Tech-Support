@@ -1,19 +1,28 @@
 
 public class BusinessAccount extends Account {
-	public BusinessAccount(String userName, String firstName, String lastName, String email, String location, String Company) {
+	public BusinessAccount(String userName, String firstName, String lastName, String email, String location, String company) {
 		super(userName, firstName, lastName, email, location);
 		// TODO Auto-generated constructor stub
+		this.company = company;
+		this.offices = new String[1];
+		this.equipment = new String[1];
+		this.software = new String[1];
+
 	}
 
 	private String company;
 	private int ID;
 	private int nextID = 1;
-	private String offices[] = new String[1];
-	private String equipment[] = new String[1];
-	private String software[] = new String[1];
+	private String offices[];
+	private String equipment[];
+	private String software[];
+
 	private int officeCount = 0;
 	private int equipCount = 0;
 	private int softCount = 0;
+
+	
+
 	
 
 	public void setCompany(String company) {
@@ -67,4 +76,36 @@ public class BusinessAccount extends Account {
 		return this.software;
 	}
 
+	public String print() {
+		String str = "Username: " + getUserName() + "	First Name: " + getFirstName() + "	Last Name: " + getLastName() 
+					+ "\nEmail: " + getEmail() + "	Location: " + getLocation() + "	Company: " + getCompany() + "\n";
+		return str;
+	}
+	
+	public String printAllOffices() {
+		String[] offices = getOffices();
+		String str = "";
+		for (int i = 0; i <= officeCount; i++) {
+			str += "Address: " + offices[i] + "	Company: " + getCompany() + "	Location: " + getLocation() + "\n";
+		}
+		return str;
+	}
+	
+	public String printAllEquipment() {
+		String[] equip = getEquipment();
+		String str = "";
+		for (int i = 0; i <= officeCount; i++) {
+			str += "Equipment: " + equip[i] + "	Company: " + getCompany() + "	Location: " + getLocation() + "\n";
+		}
+		return str;
+	}
+	
+	public String printAllSoftware() {
+		String[] software = getSoftware();
+		String str = "";
+		for (int i = 0; i <= officeCount; i++) {
+			str += "Software: " + software[i] + "	Company: " + getCompany() + "	Location: " + getLocation() + "\n";
+		}
+		return str;
+	}
 }
