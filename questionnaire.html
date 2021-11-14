@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Renct-Questionnaire</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+    <header id="mainheader">
+        <div class="containerhead">
+            <div id='headicon'>
+                <img src="img/logo.gif.jpg">
+            </div>    
+        </div>
+    </header>
+    <nav id="navbar">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="AboutUs.html">About Us</a></li>
+                <li><a href="questionnaire.html">Questionnaire </a></li>
+                <li><a href="contactus.html">Contact Us</a></li>
+                <input type="text"  placeholder="Search..">
+                <button type="submit" onclick="window.open('ExampleCompany.html')">Submit</button>
+            </ul>
+        </div>
+    </nav>
+    <div class="content">
+        <section id="main">
+            <h1>Questionnaire</h1>
+            <p> To best meet you specific requirements in regards to what you wish to rent out please fill out this questionnaire 
+                to find the best deals in your area.</p>
+            <form action="contactus.html" method="POST">
+                <div><label for="name">Name:</label><input type="text" id="name" name="u_name"></div>
+                <div><label for="mail">E-mail:</label><input type="email" id="mail" name="u_mail"></div>
+                <p>Please select the options you require to rent:</p>
+                <form>
+            <label class="checkbox-inline">
+            <input type="checkbox" value="">Office Space
+            </label>
+            <label class="checkbox-inline">
+            <input type="checkbox" value="">Harware
+            </label>
+            <label class="checkbox-inline">
+            <input type="checkbox" value="">Furniture
+            </label>
+            <label class="checkbox-inline">
+            <input type="checkbox" value="">Software
+            </label>
+                </form>
+                <p>Please locate a suitable area in which you wish to rent from:</p>
+                <div class="map-responsive">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9933.262604240736!2d-0.13593615751051083!3d51.5074247741607!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487604ce37bbdb95%3A0x5120415568fd2d8b!2sCentral%20London%2C%20London%20SW1A%202DR!5e0!3m2!1sen!2suk!4v1636894320589!5m2!1sen!2suk" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div>
+                <p>Please select a radius that suits your needs:</p>
+                <div><label for="range">0 - 5 miles</label><input type="radio" id="small" name="u_name"></div>
+                <div><label for="range">5 - 15 miles</label><input type="radio" id="small" name="u_name"></div>
+                <div><label for="range">15 - 25 miles</label><input type="radio" id="small" name="u_name"></div>
+                <div><label for="range">25 + miles</label><input type="radio" id="small" name="u_name"></div>
+                <p>If there is anything else you wish to add please enter it below:</p>
+                <div><label for="msg"></label><textarea rows="7" cols="125" id="msg" name="u_message"></textarea></div>
+                <div class="button" onclick="window.open('Submitted.html')"><input type="submit" value="Submit your Questionnaire"></div>
+            </form>
+        </section>
+        <aside id="sidebar">
+            <p> This Questionniare is used so that we pair you with the best rentals that match your
+                Specific needs. more text etc.</p>
+            <p>If your needs cannot be suitably outlined in this form, please go to the <a href="contactus.html">Contact Us page</a> to forward your query there.</p>
+        </aside>
+    </div>
+    <footer id="mainfooter">
+        <div class="container">
+            <p>Copyright &copy; Renct</p>
+        </div>
+    </footer>
+</body>
+
+</html>
