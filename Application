@@ -33,7 +33,7 @@ public class Application {
 		String email = input.nextLine();
 		System.out.println("Please Enter Your Location: (For testing sake please enter Belfast, Glasgow or London");
 		String location = input.nextLine();
-		if (type == AccountType.CUSTOMER) {									//ISSUE WITH THIS IT DOESN'T WORK
+		if (type == AccountType.CUSTOMER) {														//ISSUE WITH THIS IT DOESN'T WORK
 			account = new CustomerAccount(userName, firstName, secondName, email, location);
 		}
 		if (type == AccountType.BUSINESS) {
@@ -80,21 +80,33 @@ public class Application {
 	}
 	
 	private static void viewOfficeSpace(String location) {
-		System.out.println("ViewOfficeSpace");
-		for (int i = 0; i < MAX; i++) {								//ISSUE INFINITE LOOP
-			String[] theirOffices = bAccounts[i].getOffices();
-			for (int j = 0; j < theirOffices.length; i++) {
-				System.out.println(theirOffices.toString());
-			}
-		} 
+		String[] options = {"View all offices", "View offices in my location"};
+		Menu officeSpace = new Menu("Please select an option: ", options);
+		int choice = officeSpace.getUserChoice();
+		switch(choice) {
+		case 1:
+			System.out.println("This will print all locations\n");
+			break;
+		case 2:
+			System.out.println("This will print only offices near you\n");
+		}
 	}
 	
 	private static void viewEquipment(String location) {
-		System.out.println("ViewEquipment");
+		String[] options = {"View all Equipment", "View Equipment in my location"};
+		Menu equipment = new Menu("Please select an option: ", options);
+		int choice = equipment.getUserChoice();
+		switch(choice) {
+		case 1:
+			System.out.println("This will print all equipment\n");
+			break;
+		case 2:
+			System.out.println("This will print only equipment near you\n");
+		}
 	}
 	
 	private static void viewSoftware(String location) {
-		System.out.println("ViewSoftware");
+		System.out.println("ViewSoftware\n");
 	}
 	
 	private static void changeProfileInformation() {
