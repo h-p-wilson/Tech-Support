@@ -94,7 +94,7 @@ public class Account {
 	
 	public String print() {
 		String str = "Username: " + getUserName() + "	First Name: " + getFirstName() + "	Last Name: " + getLastName() 
-					+ "\nEmail: " + getEmail() + "	Location: " + getLocation();
+					+ "\nEmail: " + getEmail() + "	Location: " + getLocation() + "\n";
 		return str;
 	}
 }
