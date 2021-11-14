@@ -286,7 +286,7 @@ public class Application {
 	
 	private static void leaveReview() {
 		System.out.println("Leave Review");
-		System.out.println("Please Enter The Company Name:	-For testing sake please enter BigCompany");
+		System.out.println("Please Enter The Company Name:	");
 		String company = input.nextLine();
 		System.out.println("Please Enter Your Review: ");
 		String review = input.nextLine();
