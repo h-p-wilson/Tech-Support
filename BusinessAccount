@@ -4,10 +4,10 @@ public class BusinessAccount extends Account {
 		super(userName, firstName, lastName, email, location);
 		// TODO Auto-generated constructor stub
 		this.company = company;
-		this.offices = new String[1];
-		this.equipment = new String[1];
-		this.software = new String[1];
-		this.specialistEquip = new String[1];
+		this.offices = new Office[1];
+		this.equipment = new Equipment[1];
+		this.software = new Software[1];
+		this.specialistEquip = new SpecialistEquipment[1];
 		this.reviews = new String[2];
 
 	}
@@ -15,10 +15,10 @@ public class BusinessAccount extends Account {
 	private String company;
 	private int ID;
 	private int nextID = 1;
-	private String offices[];
-	private String equipment[];
-	private String software[];
-	private String specialistEquip[];
+	private Office offices[];
+	private Equipment equipment[];
+	private Software software[];
+	private SpecialistEquipment specialistEquip[];
 	private String reviews[];
 
 	private int officeCount = 0;
@@ -48,19 +48,23 @@ public class BusinessAccount extends Account {
 		nextID ++;
 	}
 	
-	public void AddOffice(String office) {
+	public void AddOffice(String name, double price) {
+		Office office = new Office(name, price);
 		offices[officeCount] = office;
 	}
 	
-	public void AddEquip(String equip) {
-		equipment[equipCount] = equip;
+	public void AddEquip(String name, double price) {
+		Equipment equipm = new Equipment(name, price);
+		equipment[equipCount] = equipm;
 	}
 	
-	public void AddSoft(String soft) {
+	public void AddSoft(String name, double price) {
+		Software soft = new Software(name, price);
 		software[softCount] = soft;
 	}
 	
-	public void AddSpec(String spec) {
+	public void AddSpec(String name, double price) {
+		SpecialistEquipment spec = new SpecialistEquipment(name, price);
 		specialistEquip[specCount] = spec;
 	}
 
@@ -76,19 +80,19 @@ public class BusinessAccount extends Account {
 		return this.ID;
 	}
 	
-	public String[] getOffices() {
+	public Office[] getOffices() {
 		return this.offices;
 	}
 	
-	public String[] getEquipment() {
+	public Equipment[] getEquipment() {
 		return this.equipment;
 	}
 	
-	public String[] getSoftware() {
+	public Software[] getSoftware() {
 		return this.software;
 	}
 	
-	public String[] getSpec() {
+	public SpecialistEquipment[] getSpec() {
 		return this.specialistEquip;
 	}
 	
@@ -103,41 +107,41 @@ public class BusinessAccount extends Account {
 	}
 	
 	public String printAllOffices() {
-		String[] offices = getOffices();
+		Office[] offices = getOffices();
 		String str = "";
 		for (int i = 0; i <= officeCount; i++) {
 			if (offices[i] != null) 
-				str += "Address: " + offices[i] + "	Company: " + getCompany() + "	Location: " + getLocation() + "\n";
+				str += "Address: " + offices[i].getName() + "	Price: " + offices[i].getPrice() + "	Company: " + getCompany() + "	Location: " + getLocation() + "\n";
 		}
 		return str;
 	}
 	
 	public String printAllEquipment() {
-		String[] equip = getEquipment();
+		Equipment[] equip = getEquipment();
 		String str = "";
-		for (int i = 0; i <= officeCount; i++) {
+		for (int i = 0; i <= equipCount; i++) {
 			if (equip[i] != null)
-				str += "Equipment: " + equip[i] + "	Company: " + getCompany() + "	Location: " + getLocation() + "\n";
+				str += "Equipment: " + equip[i].getName() + "	Price: " + equip[i].getPrice() +   "	Company: " + getCompany() + "	Location: " + getLocation() + "\n";
 		}
 		return str;
 	}
 	
 	public String printAllSoftware() {
-		String[] software = getSoftware();
+		Software[] software = getSoftware();
 		String str = "";
-		for (int i = 0; i <= officeCount; i++) {
+		for (int i = 0; i <= softCount; i++) {
 			if (software[i] != null)
-			str += "Software: " + software[i] + "	Company: " + getCompany() + "	Location: " + getLocation() + "\n";
+			str += "Software: " + software[i].getName() + "	Price: " + software[i].getPrice() +  "	Company: " + getCompany() + "	Location: " + getLocation() + "\n";
 		}
 		return str;
 	}
 	
 	public String printAllSpecEquipment() {
-		String[] equip = getSpec();
+		SpecialistEquipment[] equip = getSpec();
 		String str = "";
-		for (int i = 0; i <= officeCount; i++) {
+		for (int i = 0; i <= equipCount; i++) {
 			if (equip[i] != null)
-			str += "Equipment: " + equip[i] + "	Company: " + getCompany() + "	Location: " + getLocation() + "\n";
+			str += "Equipment: " + equip[i].getName() + "	Price: " + equip[i].getPrice() +  "	Company: " + getCompany() + "	Location: " + getLocation() + "\n";
 		}
 		return str;
 	}
