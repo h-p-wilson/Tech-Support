@@ -1,0 +1,9 @@
+
+public class Equipment extends Item{
+
+	public Equipment(String name, Double price) {
+		super(name, price);
+		// TODO Auto-generated constructor stub
+	}
+
+}
