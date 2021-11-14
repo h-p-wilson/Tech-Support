@@ -7,6 +7,8 @@ public class BusinessAccount extends Account {
 		this.offices = new String[1];
 		this.equipment = new String[1];
 		this.software = new String[1];
+		this.specialistEquip = new String[1];
+		this.reviews = new String[2];
 
 	}
 
@@ -16,10 +18,14 @@ public class BusinessAccount extends Account {
 	private String offices[];
 	private String equipment[];
 	private String software[];
+	private String specialistEquip[];
+	private String reviews[];
 
 	private int officeCount = 0;
 	private int equipCount = 0;
 	private int softCount = 0;
+	private int specCount = 0;
+	private int reviewCount = 0;
 
 	
 
@@ -54,7 +60,13 @@ public class BusinessAccount extends Account {
 		software[softCount] = soft;
 	}
 	
+	public void AddSpec(String spec) {
+		specialistEquip[specCount] = spec;
+	}
 
+	public void AddReview(String review) {
+		reviews[reviewCount] = review;
+	}
 	
 	public String getCompany() {
 		return this.company;
@@ -75,6 +87,14 @@ public class BusinessAccount extends Account {
 	public String[] getSoftware() {
 		return this.software;
 	}
+	
+	public String[] getSpec() {
+		return this.specialistEquip;
+	}
+	
+	public String[] getReviews() {
+		return this.reviews;
+	}
 
 	public String print() {
 		String str = "Username: " + getUserName() + "	First Name: " + getFirstName() + "	Last Name: " + getLastName() 
@@ -86,7 +106,8 @@ public class BusinessAccount extends Account {
 		String[] offices = getOffices();
 		String str = "";
 		for (int i = 0; i <= officeCount; i++) {
-			str += "Address: " + offices[i] + "	Company: " + getCompany() + "	Location: " + getLocation() + "\n";
+			if (offices[i] != null) 
+				str += "Address: " + offices[i] + "	Company: " + getCompany() + "	Location: " + getLocation() + "\n";
 		}
 		return str;
 	}
@@ -95,7 +116,8 @@ public class BusinessAccount extends Account {
 		String[] equip = getEquipment();
 		String str = "";
 		for (int i = 0; i <= officeCount; i++) {
-			str += "Equipment: " + equip[i] + "	Company: " + getCompany() + "	Location: " + getLocation() + "\n";
+			if (equip[i] != null)
+				str += "Equipment: " + equip[i] + "	Company: " + getCompany() + "	Location: " + getLocation() + "\n";
 		}
 		return str;
 	}
@@ -104,8 +126,37 @@ public class BusinessAccount extends Account {
 		String[] software = getSoftware();
 		String str = "";
 		for (int i = 0; i <= officeCount; i++) {
+			if (software[i] != null)
 			str += "Software: " + software[i] + "	Company: " + getCompany() + "	Location: " + getLocation() + "\n";
 		}
+		return str;
+	}
+	
+	public String printAllSpecEquipment() {
+		String[] equip = getSpec();
+		String str = "";
+		for (int i = 0; i <= officeCount; i++) {
+			if (equip[i] != null)
+			str += "Equipment: " + equip[i] + "	Company: " + getCompany() + "	Location: " + getLocation() + "\n";
+		}
+		return str;
+	}
+	
+	public String printAllReviews() {
+		String[] reviews = getReviews();
+		String str = "";
+		for (int i = 0; i <= reviewCount; i++) {
+			str += reviews[i] + "\n";
+		}
+		return str;
+	}
+	
+	public String printAll() {
+		String str = "";
+		str += printAllOffices();
+		str += printAllEquipment();
+		str += printAllSoftware();
+		str += printAllSpecEquipment();
 		return str;
 	}
 }
