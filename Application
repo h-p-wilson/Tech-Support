@@ -12,9 +12,11 @@ public class Application {
 
 		
 		populateBusiness();
+		populateCustomer();
 	
 		
-		System.out.println("Welcome to PlaceHolderName" + "\nPlease Create an Account");
+		System.out.println("~~~~~     Welcome to Renct     ~~~~~" + "\nMake and save money with renct, a one-stop-shop for all your professional and personal needs!");
+		System.out.println("\nPlease make an account: ");
 		String[] options = {"Customer", "Business"};
 		Menu busiOrCust = new Menu ("Are you a customer or a business?", options );
 		int choice = busiOrCust.getUserChoice();
@@ -146,28 +148,36 @@ public class Application {
 	private static void addSpecEquip(BusinessAccount account) {
 		System.out.println("Please Enter Specialist Equipment: ");
 		String spec = input.nextLine();
-		account.AddSpec(spec);
+		System.out.println("Please Enter Price: ");
+		double dub = input.nextDouble();
+		account.AddSpec(spec, dub);
 		
 	}
 
 	private static void addSoftware(BusinessAccount account) {
 		System.out.println("Please Enter Software: ");
 		String soft = input.nextLine();
-		account.AddSpec(soft);
+		System.out.println("Please Enter Price: ");
+		double dub = input.nextDouble();
+		account.AddSpec(soft, dub);
 		
 	}
 
 	private static void addEquipment(BusinessAccount account) {
 		System.out.println("Please Enter Equipment: ");
 		String equip = input.nextLine();
-		account.AddSpec(equip);
+		System.out.println("Please Enter Price: ");
+		double dub = input.nextDouble();
+		account.AddSpec(equip, dub);
 		
 	}
 
 	private static void addOfficeSpace(BusinessAccount account) {
 		System.out.println("Please Enter Office Space: ");
 		String space = input.nextLine();
-		account.AddSpec(space);
+		System.out.println("Please Enter Price: ");
+		double dub = input.nextDouble();
+		account.AddSpec(space, dub);
 		
 	}
 
@@ -312,7 +322,7 @@ public class Application {
 		}
 	}
 	
-	private static void populateCustomr() {
+	private static void populateCustomer() {
 		CustomerAccount c1 = new CustomerAccount("Athena", "Athena" , "Hackathon", "address@a.com", "Belfast");
 		CustomerAccount c2 = new CustomerAccount("CatDog", "Cat", "Dog", "address@a.com", "Belfast");
 		CustomerAccount c3 = new CustomerAccount("user", "User", "Name", "address@a.com", "Belfast");
@@ -330,39 +340,39 @@ public class Application {
 	
 	private static void populateBusiness() {
 		BusinessAccount a1 = new BusinessAccount("WeirdAlbert", "Albert", "Yakovitsky", "address@a.com", "Belfast", "BigCompany");
-		a1.AddOffice("1 Silly Street");
-		a1.AddEquip("MicroHard Laptop");
-		a1.AddSoft("NotPhotoShop");
-		a1.AddSpec("3d Printer");
+		a1.AddOffice("1 Silly Street", 1000.0);
+		a1.AddEquip("MicroHard Laptop", 20.0);
+		a1.AddSoft("NotPhotoShop", 5);
+		a1.AddSpec("3d Printer", 200);
 		BusinessAccount a2 = new BusinessAccount("LadyGooGoo", "Miss", "Googoo", "address@a.com", "Belfast", "WeeCompany");
-		a2.AddOffice("2 Silly Street");
-		a2.AddEquip("MicroHard Laptop");
-		a2.AddSoft("NotPhotoShop");
-		a2.AddSpec("3d Printer");
+		a2.AddOffice("2 Silly Street" , 1000.0);
+		a2.AddEquip("MicroHard Laptop", 20);
+		a2.AddSoft("NotPhotoShop", 5);
+		a2.AddSpec("3d Printer", 200);
 
 		BusinessAccount a3 = new BusinessAccount("JustoutBeaver", "Justout", "Beaver", "address@a.com", "London", "MediumCompany");
-		a3.AddOffice("3 Silly Street");
-		a3.AddEquip("MicroHard Laptop");
-		a3.AddSoft("NotPhotoShop");
-		a3.AddSpec("3d Printer");
+		a3.AddOffice("3 Silly Street", 1000);
+		a3.AddEquip("MicroHard Laptop", 20);
+		a3.AddSoft("NotPhotoShop", 5);
+		a3.AddSpec("3d Printer", 200);
 
 		BusinessAccount a4 = new BusinessAccount("Marinara", "Marinara", "Diamond", "address@a.com", "London", "WeeMediumCompany");
-		a4.AddOffice("4 Silly Street");
-		a4.AddEquip("MicroHard Laptop");
-		a4.AddSoft("NotPhotoShop");
-		a4.AddSpec("3d Printer");
+		a4.AddOffice("4 Silly Street", 1000);
+		a4.AddEquip("MicroHard Laptop", 20);
+		a4.AddSoft("NotPhotoShop", 5);
+		a4.AddSpec("3d Printer", 200);
 
 		BusinessAccount a5 = new BusinessAccount("BabDylo", "Bab", "Dylo", "address@a.com", "Glasgow", "MediumBigCompany");
-		a5.AddOffice("5 Silly Street");
-		a5.AddEquip("MicroHard Laptop");
-		a5.AddSoft("NotPhotoShop");	
-		a5.AddSpec("3d Printer");
+		a5.AddOffice("5 Silly Street", 1000);
+		a5.AddEquip("MicroHard Laptop", 20);
+		a5.AddSoft("NotPhotoShop", 5);	
+		a5.AddSpec("3d Printer", 200);
 
 		BusinessAccount a6 = new BusinessAccount("SandRabbit", "Sand", "Rabbit", "address@a.com", "Glasgow", "WeeBigCompany");
-		a6.AddOffice("6 Silly Street");
-		a6.AddEquip("MicroHard Laptop");
-		a6.AddSoft("NotPhotoShop");
-		a6.AddSpec("3d Printer");
+		a6.AddOffice("6 Silly Street", 1000);
+		a6.AddEquip("MicroHard Laptop", 20);
+		a6.AddSoft("NotPhotoShop", 5);
+		a6.AddSpec("3d Printer", 200);
 
 		
 		bAccounts[0] = a1;
