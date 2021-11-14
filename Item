@@ -33,6 +33,6 @@ public class Item {
 	}
 	
 	public double getPrice() {
-		return this.getPrice();
+		return this.price;
 	}
 }
