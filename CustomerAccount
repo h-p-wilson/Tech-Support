@@ -3,7 +3,26 @@ public class CustomerAccount extends Account{
 
 	public CustomerAccount(String userName, String firstName, String lastName, String email, String location) {
 		super(userName, firstName, lastName, email, location);
-		// TODO Auto-generated constructor stub
+	this.reviews = reviews;
 	}
 
+	private String reviews[];
+	private int reviewCount = 0;
+	
+	public String printAllReviews() {
+		String[] reviews = getReviews();
+		String str = "";
+		for (int i = 0; i <= reviewCount; i++) {
+			str += reviews[i] + "\n";
+		}
+		return str;
+	}
+	
+	public String[] getReviews() {
+		return this.reviews;
+	}
+	
+	public void AddReview(String review) {
+		reviews[reviewCount] = review;
+	}
 }
