@@ -5,7 +5,8 @@ public class Application {
 	static BusinessAccount[] bAccounts = new BusinessAccount[MAX];
 	static Scanner input = new Scanner(System.in);
 	static Account account = null;
-			
+	
+	
 	public static void main(String[] args) {
 
 		
@@ -57,7 +58,7 @@ public class Application {
 			}
 		} while (!done);
 	
-	}
+	} 
 	
 	public static void processOption(int choice, Account account) {
 		switch(choice) {
@@ -86,9 +87,17 @@ public class Application {
 		switch(choice) {
 		case 1:
 			System.out.println("This will print all locations\n");
+			for (int i = 0; i < MAX; i++) {
+				System.out.println(bAccounts[i].printAllOffices());
+			}
 			break;
 		case 2:
 			System.out.println("This will print only offices near you\n");
+			for (int i = 0; i < MAX; i++) {
+				if (bAccounts[i].getLocation().equals(account.getLocation())) {
+					System.out.println(bAccounts[i].printAllOffices());
+				}
+			}
 		}
 	}
 	
@@ -99,14 +108,25 @@ public class Application {
 		switch(choice) {
 		case 1:
 			System.out.println("This will print all equipment\n");
+			for (int i = 0; i < MAX; i++) {
+				System.out.println(bAccounts[i].printAllEquipment());
+			}
 			break;
 		case 2:
 			System.out.println("This will print only equipment near you\n");
+			for (int i = 0; i < MAX; i++) {
+				if (bAccounts[i].getLocation().equals(account.getLocation())) {
+					System.out.println(bAccounts[i].printAllEquipment());
+				}
+			}
 		}
 	}
 	
 	private static void viewSoftware(String location) {
-		System.out.println("ViewSoftware\n");
+		System.out.println("View Software\n");
+		for (int i = 0; i < MAX; i++) {
+			System.out.println(bAccounts[i].printAllSoftware());
+		}
 	}
 	
 	private static void changeProfileInformation() {
