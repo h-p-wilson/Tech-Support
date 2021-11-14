@@ -1,0 +1,38 @@
+
+public class Item {
+	public Item (String name, Double price) {
+		this.name = name;
+		this.price = price;
+	}
+	
+	private String name;
+	private double price;
+	
+	public void setName(String name) {
+		if (name != null) {
+			this.name = name;
+		} else {
+			if (this.name == null) {
+				this.name = "null";
+				System.out.println("ERROR - Username must not be null.");
+			}
+		}
+	}
+	
+	public void setPrince(double price) {
+		if (price > 0.0) {
+			this.price = price;
+		}
+		else {
+			System.out.println("ERROR - Price must be greater than 0.0");
+		}
+	}
+	
+	public String getName() {
+		return this.name;
+	}
+	
+	public double getPrice() {
+		return this.getPrice();
+	}
+}
