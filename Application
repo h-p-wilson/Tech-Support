@@ -3,6 +3,7 @@ public class Application {
 
 	static final int MAX = 6;
 	static BusinessAccount[] bAccounts = new BusinessAccount[MAX];
+	static CustomerAccount[] cAccounts = new CustomerAccount[MAX];
 	static Scanner input = new Scanner(System.in);
 	static Account account = null;
 	
@@ -19,11 +20,14 @@ public class Application {
 		int choice = busiOrCust.getUserChoice();
 		AccountType type = null;
 		if (choice == 1) {												
-			type = AccountType.CUSTOMER;
+			customerMainApp();
 		}
 		if (choice == 2) {
-			type = AccountType.BUSINESS;
+			businessMainApp();
 		}
+	} 
+	
+	public static void customerMainApp() {
 		System.out.println("Please Enter Your Username: ");
 		String userName = input.nextLine();
 		System.out.println("Please Enter Your First Name: ");
@@ -34,19 +38,13 @@ public class Application {
 		String email = input.nextLine();
 		System.out.println("Please Enter Your Location: (For testing sake please enter Belfast, Glasgow or London");
 		String location = input.nextLine();
-		if (type == AccountType.CUSTOMER) {														//ISSUE WITH THIS IT DOESN'T WORK
-			account = new CustomerAccount(userName, firstName, secondName, email, location);
-		}
-		if (type == AccountType.BUSINESS) {
-			System.out.println("Please Enter Your Company");
-			String company = input.nextLine();
-			account = new BusinessAccount(userName, firstName, secondName, email, location, company);
-			bAccounts[0] = (BusinessAccount) account;
-		}
-		
-		String[] mainOptions = {"View Office Space", "View Equipment", "View Software", "Change Profile Information", "Leave Review", "Quit"};
+													
+		CustomerAccount account = new CustomerAccount(userName, firstName, secondName, email, location);
+		int options;
+		String[] mainOptions = {"View Office Space", "View Equipment", "View Software", "View Specialist Equipment", "Leave Review", "Quit"};
 		Menu main = new Menu("Main Menu: ", mainOptions);
-		int quitOption = options.length;
+		int quitOption = mainOptions.length;
+		int choice;
 		boolean done = false;
 		
 		do {
@@ -54,33 +52,148 @@ public class Application {
 			if (choice == quitOption) {
 				done = true;
 			} else {
-				processOption(choice, account);
+				processCustomerOption(choice, account);
 			}
 		} while (!done);
 	
-	} 
+	}
 	
-	public static void processOption(int choice, Account account) {
+	public static void businessMainApp() {
+		System.out.println("Please Enter Your Username: ");
+		String userName = input.nextLine();
+		System.out.println("Please Enter Your First Name: ");
+		String firstName = input.nextLine();
+		System.out.println("Please Enter Your Surname: ");
+		String secondName = input.nextLine();
+		System.out.println("Please Enter Your Email: ");
+		String email = input.nextLine();
+		System.out.println("Please Enter Your Location: (For testing sake please enter Belfast, Glasgow or London");
+		String location = input.nextLine();
+		System.out.println("Please Enter Your Company");
+		String company = input.nextLine();
+		BusinessAccount account = new BusinessAccount(userName, firstName, secondName, email, location, company);
+		bAccounts[0] = (BusinessAccount) account;
+		
+		String[] mainOptions = {"Add Office Space", "Add Equipment", "Add Software", "Add Specialist Equipment", "View Current Rentals", "Leave Review", "Quit"};
+		Menu main = new Menu("Main Menu: ", mainOptions);
+		
+		int quitOption = mainOptions.length;
+		int choice;
+		boolean done = false;
+		
+		do {
+			choice = main.getUserChoice();
+			if (choice == quitOption) {
+				done = true;
+			} else {
+				processBusinessChoice(choice, account);
+			}
+		} while (!done);
+	
+	}
+	
+	public static void processCustomerOption(int choice, CustomerAccount account) {
 		switch(choice) {
 		case 1:
-			viewOfficeSpace(account.getLocation());
+			viewOfficeSpace(account);
 			break;
 		case 2:
-			viewEquipment(account.getLocation());		//issue with 2 for some reason
+			viewEquipment(account);		
 			break;
 		case 3:
-			viewSoftware(account.getLocation());
+			viewSoftware(account);
 			break;
 		case 4:
-			changeProfileInformation();
-			break;
+			viewSpec(account);	//Issue this triggers the next case
+
 		case 5:
 			leaveReview();
 			break;
 		}
 	}
 	
-	private static void viewOfficeSpace(String location) {
+	public static void processBusinessChoice(int choice, BusinessAccount account) {
+		switch(choice) {
+		case 1:
+			addOfficeSpace(account);
+			break;
+		case 2:
+			addEquipment(account);
+			break;
+		case 3:
+			addSoftware(account);
+			break;
+		case 4:
+			addSpecEquip(account);
+			break;
+		case 5:
+			viewOwned(account);
+
+		case 6:
+			leaveCustomerReview();
+			break;
+		}
+	}
+	
+	
+	
+	private static void viewOwned(BusinessAccount account) {
+		System.out.println(account.printAll());
+	}
+
+
+
+	private static void addSpecEquip(BusinessAccount account) {
+		System.out.println("Please Enter Specialist Equipment: ");
+		String spec = input.nextLine();
+		account.AddSpec(spec);
+		
+	}
+
+	private static void addSoftware(BusinessAccount account) {
+		System.out.println("Please Enter Software: ");
+		String soft = input.nextLine();
+		account.AddSpec(soft);
+		
+	}
+
+	private static void addEquipment(BusinessAccount account) {
+		System.out.println("Please Enter Equipment: ");
+		String equip = input.nextLine();
+		account.AddSpec(equip);
+		
+	}
+
+	private static void addOfficeSpace(BusinessAccount account) {
+		System.out.println("Please Enter Office Space: ");
+		String space = input.nextLine();
+		account.AddSpec(space);
+		
+	}
+
+	private static void viewSpec(CustomerAccount account) {
+		String[] options = {"View all Specialist Equipment", "View Specialist Equipment in my location"};
+		Menu equipment = new Menu("Please select an option: ", options);
+		int choice = equipment.getUserChoice();
+		switch(choice) {
+		case 1:
+			System.out.println("This will print all specialist equipment\n");
+			for (int i = 0; i < MAX; i++) {
+				System.out.println(bAccounts[i].printAllSpecEquipment());
+			}
+			break;
+		case 2:
+			System.out.println("This will print only specialist equipment near you\n");
+			for (int i = 0; i < MAX; i++) {
+				if (bAccounts[i].getLocation().equals(account.getLocation())) {
+					System.out.println(bAccounts[i].printAllSpecEquipment());
+				}
+			}
+		}
+		
+	}
+
+	private static void viewOfficeSpace(CustomerAccount account) {
 		String[] options = {"View all offices", "View offices in my location"};
 		Menu officeSpace = new Menu("Please select an option: ", options);
 		int choice = officeSpace.getUserChoice();
@@ -101,7 +214,7 @@ public class Application {
 		}
 	}
 	
-	private static void viewEquipment(String location) {
+	private static void viewEquipment(CustomerAccount acount) {
 		String[] options = {"View all Equipment", "View Equipment in my location"};
 		Menu equipment = new Menu("Please select an option: ", options);
 		int choice = equipment.getUserChoice();
@@ -122,7 +235,7 @@ public class Application {
 		}
 	}
 	
-	private static void viewSoftware(String location) {
+	private static void viewSoftware(CustomerAccount account) {
 		System.out.println("View Software\n");
 		for (int i = 0; i < MAX; i++) {
 			System.out.println(bAccounts[i].printAllSoftware());
@@ -162,7 +275,57 @@ public class Application {
 	}
 	
 	private static void leaveReview() {
-		System.out.println("LeaveReview");
+		System.out.println("Leave Review");
+		System.out.println("Please Enter The Company Name:	-For testing sake please enter BigCompany");
+		String company = input.nextLine();
+		System.out.println("Please Enter Your Review: ");
+		String review = input.nextLine();
+		boolean found = false;
+		for (int i = 0; i < MAX; i++) {
+			if (bAccounts[i].getCompany().equals(company)) {
+				bAccounts[i].AddReview(review);
+				System.out.println("Review Successfully Added");
+				found = true;
+			}
+		}
+		if (!found) {
+			System.out.println("There is no company by that name in this system");
+		}
+	}
+	
+	private static void leaveCustomerReview() {
+		System.out.println("Leave Review");
+		System.out.println("Please Enter The Customer's UserName:	-For testing sake please enter Athena");
+		String userName = input.nextLine();
+		System.out.println("Please Enter Your Review: ");
+		String review = input.nextLine();
+		boolean found = false;
+		for (int i = 0; i < MAX; i++) {
+			if (cAccounts[i].getUserName().equals(userName)) {
+				cAccounts[i].AddReview(review);
+				System.out.println("Review Successfully Added");
+				found = true;
+			}
+		}
+		if (!found) {
+			System.out.println("There is no user by that name in this system");
+		}
+	}
+	
+	private static void populateCustomr() {
+		CustomerAccount c1 = new CustomerAccount("Athena", "Athena" , "Hackathon", "address@a.com", "Belfast");
+		CustomerAccount c2 = new CustomerAccount("CatDog", "Cat", "Dog", "address@a.com", "Belfast");
+		CustomerAccount c3 = new CustomerAccount("user", "User", "Name", "address@a.com", "Belfast");
+		CustomerAccount c4 = new CustomerAccount("Cushion", "Sofa", "Pillow", "address@a.com", "Belfast");
+		CustomerAccount c5 = new CustomerAccount("Customer5", "Java", "Script", "address@a.com", "Belfast");
+		CustomerAccount c6 = new CustomerAccount("Customer6", "Java", "Language", "address@a.com", "Belfast");
+		
+		cAccounts[0] = c1;
+		cAccounts[1] = c2;
+		cAccounts[2] = c3;
+		cAccounts[3] = c4;
+		cAccounts[4] = c5;
+		cAccounts[5] = c6;
 	}
 	
 	private static void populateBusiness() {
@@ -170,26 +333,37 @@ public class Application {
 		a1.AddOffice("1 Silly Street");
 		a1.AddEquip("MicroHard Laptop");
 		a1.AddSoft("NotPhotoShop");
+		a1.AddSpec("3d Printer");
 		BusinessAccount a2 = new BusinessAccount("LadyGooGoo", "Miss", "Googoo", "address@a.com", "Belfast", "WeeCompany");
 		a2.AddOffice("2 Silly Street");
 		a2.AddEquip("MicroHard Laptop");
 		a2.AddSoft("NotPhotoShop");
+		a2.AddSpec("3d Printer");
+
 		BusinessAccount a3 = new BusinessAccount("JustoutBeaver", "Justout", "Beaver", "address@a.com", "London", "MediumCompany");
 		a3.AddOffice("3 Silly Street");
 		a3.AddEquip("MicroHard Laptop");
 		a3.AddSoft("NotPhotoShop");
+		a3.AddSpec("3d Printer");
+
 		BusinessAccount a4 = new BusinessAccount("Marinara", "Marinara", "Diamond", "address@a.com", "London", "WeeMediumCompany");
 		a4.AddOffice("4 Silly Street");
 		a4.AddEquip("MicroHard Laptop");
 		a4.AddSoft("NotPhotoShop");
+		a4.AddSpec("3d Printer");
+
 		BusinessAccount a5 = new BusinessAccount("BabDylo", "Bab", "Dylo", "address@a.com", "Glasgow", "MediumBigCompany");
 		a5.AddOffice("5 Silly Street");
 		a5.AddEquip("MicroHard Laptop");
-		a5.AddSoft("NotPhotoShop");
+		a5.AddSoft("NotPhotoShop");	
+		a5.AddSpec("3d Printer");
+
 		BusinessAccount a6 = new BusinessAccount("SandRabbit", "Sand", "Rabbit", "address@a.com", "Glasgow", "WeeBigCompany");
 		a6.AddOffice("6 Silly Street");
 		a6.AddEquip("MicroHard Laptop");
 		a6.AddSoft("NotPhotoShop");
+		a6.AddSpec("3d Printer");
+
 		
 		bAccounts[0] = a1;
 		bAccounts[1] = a2;
