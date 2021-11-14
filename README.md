@@ -20,7 +20,6 @@ Our website features various pages with the most significant one being the quest
 
 * **Select a location**
 * * The user chooses a location from an interactive map. 
-* * *See future plans for more details*
 
 * **Select a radius**
 * * The user can determine how far away they are willing to see results from using a radius from their location. The radius is measured in miles.
@@ -30,10 +29,17 @@ Our website features various pages with the most significant one being the quest
 
 ## Java interface
 In order to demo the interactivity of our site, we decided to use Java to create a text based version of what type of information we would require from users. Various classes
-are used to imitate the functionality of the website:
+are used to imitate the functionality of the website the main ones being:
 
 * **Reviews**
 * * To ensure our users get the best experience using our site and eliminate risk, we decided to employ the use of a review system. Once a user has rencted out an item from a company, they are able to rate their experience with the company and leave reviews. Companies are also capable of doing this. If a user has returned the item they rencted damaged, a company can leave them a bad review or contact us to report them. This ensures our platform remains risk-free and we can offer the best experience to our users.
 
-* ****
+* **Accounts**
+* * As stated previously, renct is intended to connect businesses and individuals. The business will of course be offering the products to renct while the individuals will be doing the rencting. Therefore, these two types of users will have different accounts that can do different things. This has been implemented through the creation of two different Java classes, CustomerAccount and BusinessAccount.
+* * These two classes inheret from the parent Account and each have their own seperate attributes.
+
 ## Future plans
+We believe renct has a lot of potential to make employees and businesses lives easier in a world where working from home is becoming the norm. Although we were not able to add all the features we would have liked in the given time, we thought it would be worth mentioning where we would go with the project:
+
+* **A mobile app**
+* * Considering how much shopping is now done from a phone, we believe venturing into the creation of a mobile app would perhaps be more suitable for the individual users. Taking inspiration from the likes of airbnb, we think it would be more convenient for an employee to just pull out there phone and renct something right there and then, making the process much more streamlined
